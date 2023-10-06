@@ -1,4 +1,4 @@
-import EnvelopeNavigation
+import EnvelopeNavigation from "../../../@envelope/core/EnvelopeNavigation";
 import classNames from "classnames";
 import {memo, useMemo} from "react";
 import {useSelector, useDispatch} from "react-redux";
@@ -19,10 +19,21 @@ function Navigation(props) {
         }
 
         return(
-            <EnvelopeNavigation>
-
-            </EnvelopeNavigation>
+            <EnvelopeNavigation
+                className={classNames('navigation', props.className)}
+                navigation={navigation}
+                layout={props.layout}
+                dense={props.dense}
+                active={props.active}
+                onItemClick={handleItemClick}
+            />
         )
 
-    }, [])
+    }, [dispatch, isMobile, navigation, props.active, props.className, props.dense, props.layout]);
 }
+
+Navigation.defaultProps = {
+    layout: 'vertical'
+}
+
+export default memo(Navigation);
