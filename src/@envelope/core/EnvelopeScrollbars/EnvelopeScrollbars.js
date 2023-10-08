@@ -5,7 +5,7 @@ import 'perfect-scrollbar/css/perfect-scrollbar.css';
 import PropTypes from 'prop-types';
 import { createRef, forwardRef, useCallback, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import history from '@history';
+import history from '../../../@history'
 import withRouterAndRef from '../withRouterAndRef/withRouterAndRef';
 
 const Root = styled('div')(({ theme }) => ({
@@ -30,7 +30,7 @@ const handlerNameByEvent = {
 };
 Object.freeze(handlerNameByEvent);
 
-const FuseScrollbars = forwardRef((props, ref) => {
+const EnvelopeScrollbars = forwardRef((props, ref) => {
     ref = ref || createRef();
     const ps = useRef(null);
     const handlerByEvent = useRef(new Map());
@@ -156,7 +156,7 @@ function mapStateToProps({ fuse }) {
     };
 }
 
-FuseScrollbars.propTypes = {
+EnvelopeScrollbars.propTypes = {
     onScrollY: PropTypes.func,
     onScrollX: PropTypes.func,
     onScrollUp: PropTypes.func,
@@ -171,7 +171,7 @@ FuseScrollbars.propTypes = {
     scrollToTopOnChildChange: PropTypes.bool,
 };
 
-FuseScrollbars.defaultProps = {
+EnvelopeScrollbars.defaultProps = {
     className: '',
     enable: true,
     scrollToTopOnChildChange: false,
@@ -193,5 +193,5 @@ FuseScrollbars.defaultProps = {
 };
 
 export default connect(mapStateToProps, null, null, { forwardRef: true })(
-    withRouterAndRef(FuseScrollbars)
+    withRouterAndRef(EnvelopeScrollbars)
 );

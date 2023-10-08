@@ -1,7 +1,7 @@
 import {IconButton} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {selectEnvelopeCurrentSettings, setDefaultSettings} from "../../store/envelope/settingsSlice";
-import _ from '@loadsh';
+import _ from '../../../@lodash';
 import {useThemeMediaQuery} from "../../../@envelope/hook";
 import {navbarToggle, navbarToggleMobile} from "../../store/envelope/navbarSlice";
 import EnvelopeSvgIcon from "../../../@envelope/core/EnvelopeSvgIcon";

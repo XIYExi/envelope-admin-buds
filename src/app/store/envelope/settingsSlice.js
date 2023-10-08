@@ -1,6 +1,6 @@
 import {createTheme, getContrastRatio} from "@mui/material/styles";
 import {createAsyncThunk, createSlice, createSelector} from "@reduxjs/toolkit";
-import _ from '@lodash';
+import _ from '../../../@lodash';
 import {
     defaultSettings,
     defaultThemeOptions,
@@ -12,7 +12,7 @@ import settingsConfig from "../../configs/settingsConfig";
 import themeLayoutConfigs from "../../theme-layouts/themeLayoutConfigs";
 import {setUser, updateUserSettings} from "../userSlice";
 import {darkPaletteText, lightPaletteText} from "../../configs/themesConfig";
-import {bgcolor} from "@mui/system";
+// import {bgcolor} from "@mui/system";
 
 
 export const changeEnvelopeTheme = (theme) => (dispatch, getState) => {
@@ -49,7 +49,7 @@ export function generateSettings(_defaultSettings, _newSettings){
     const response = _.merge(
         {},
         _defaultSettings,
-        {layout: {config: themeLayoutConfigs[_newSettings?.layout?.style]?.default}},
+        {layout:  { config: themeLayoutConfigs[_newSettings?.layout?.style]?.defaults } },
         _newSettings,
     );
 
@@ -97,26 +97,28 @@ const settingsSlice = createSlice({
             };
         },
         setInitialSettings: (state, action) => {
-            return _.merge({}, initialSettings);
+            return _.merge({}, initialState);
         },
         resetSettings: (state, action) => {
             return {
                 ...state,
                 defaults: _.merge({}, state.defaults),
                 current: _.merge({}, state.defaults),
-            }
-        }
+            };
+        },
     },
     extraReducers: {
         [setDefaultSettings.fulfilled]: (state, action) => action.payload,
         [setUser.fulfilled]: (state, action) => {
-            const defaults = generateSettings(state.defaults, action.payload?.data?.settings);
+            const defaults = generateSettings(state.defaults,
+                action.payload?.data?.settings);
             return {
                 ...state,
                 defaults: _.merge({}, defaults),
                 current: _.merge({}, defaults),
             };
         },
+
     }
 });
 
@@ -139,11 +141,11 @@ function generateMuiTheme(theme, direction){
 }
 
 
-export const selectContrastMainTheme = (object) => {
+export const selectContrastMainTheme = (bgColor) => {
     function isDark(color){
         return getContrastRatio(color, '#ffffff') >= 3;
     }
-    return isDark(bgcolor) ? selectMainThemeDark : selectMainThemeLight;
+    return isDark(bgColor) ? selectMainThemeDark : selectMainThemeLight;
 }
 
 

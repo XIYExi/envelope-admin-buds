@@ -1,6 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
+    state: null,
     options: {
         anchorOrigin: {
             vertical: 'top',
@@ -10,7 +11,7 @@ const initialState = {
         message: 'OI Message Box',
         variant: null,
     },
-}
+};
 
 const messageSlice = createSlice({
     name: 'message',

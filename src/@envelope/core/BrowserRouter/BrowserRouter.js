@@ -1,5 +1,5 @@
 import {useLayoutEffect, useState} from "react";
-import history from '@history';
+import history from '../../../@history';
 import {Router} from 'react-router-dom';
 
 export default function BrowserRouter({basename, children, window}) {

@@ -1,8 +1,8 @@
 import {Component, forwardRef} from "react";
-import withRouter from "@envelope/core/withRouter";
+import withRouter from "../withRouter";
 
 /*HOC组件，将接收到的组件先用withRouter包裹，之后在用forwardRef包裹，达到传递ref的效果，最后ref会被传递到*/
-const WithRouterAndRef = (WrappedComponent) => {
+const withRouterAndRef = (WrappedComponent) => {
     class InnerComponentWithRef extends Component {
         render(){
             const {forwardRef: _forwardRef, ...rest} = this.props;
@@ -17,4 +17,4 @@ const WithRouterAndRef = (WrappedComponent) => {
 }
 
 
-export default WithRouterAndRef;
+export default withRouterAndRef;

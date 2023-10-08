@@ -1,20 +1,25 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import _ from '@lodash';
-import history from '@history';
+import _ from '../../@lodash';
+import history from '../../@history'
 
 import {showMessage} from "./envelope/messageSlice";
 import settingsConfig from "../configs/settingsConfig";
 import jwtService from "../auth/services/jwtService/jwtService";
+import {setInitialSettings} from "./envelope/settingsSlice";
 
 
-export const setUser = createAsyncThunk('/user/setUser', async (user, {dispatch, getState}) => {
-
+export const setUser = createAsyncThunk(
+    'user/setUser',
+    async (user, { dispatch, getState }) => {
+    /*
+      You can redirect the logged-in user to a specific route depending on his role
+      */
     if (user.loginRedirectUrl) {
-        settingsConfig.loginRedirectUrl = user.loginRedirectUrl;
+        settingsConfig.loginRedirectUrl = user.loginRedirectUrl; // for example '/apps/academy'
     }
 
     return user;
-})
+});
 
 export const updateUserSettings = createAsyncThunk(
     'user/updateSettings',
@@ -26,7 +31,7 @@ export const updateUserSettings = createAsyncThunk(
 
         return newUser;
     }
-)
+);
 
 export const updateUserShortcuts = createAsyncThunk(
     'user/updateShortcuts',

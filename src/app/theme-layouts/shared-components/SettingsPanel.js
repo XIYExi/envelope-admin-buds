@@ -111,7 +111,7 @@ function SettingsPanel(){
                     disableRipple
                 >
                   <span>
-                    <EnvelopeSvgIcon size={20}>heroicons-solid:cog</>
+                      <EnvelopeSvgIcon size={20}>heroicons-solid:cog</EnvelopeSvgIcon>
                   </span>
                 </Button>
 
@@ -202,7 +202,7 @@ function SettingsPanel(){
 
 
 
-
+export default memo(SettingsPanel)
 
 
 

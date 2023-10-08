@@ -2,7 +2,7 @@ import {createSlice, createSelector, createEntityAdapter} from "@reduxjs/toolkit
 import navigationConfig from "../../configs/navigationConfig";
 import EnvelopeUtils from "../../../@envelope/utils";
 import i18next from "i18next";
-import _  from '@lodash';
+import _  from '../../../@lodash'
 
 const navigationAdapter = createEntityAdapter();// 创建实体配置器，规范state
 const emptyInitialState = navigationAdapter.getInitialState();
