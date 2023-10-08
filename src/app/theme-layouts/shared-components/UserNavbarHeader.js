@@ -51,7 +51,6 @@ function UserNavbarHeader(props) {
             </Typography>
         </Root>
     )
-
 }
 
 export default UserNavbarHeader;
