@@ -32,7 +32,7 @@ export default ExampleConfig;
  */
 
 
-const Example = lazy(() => import('./Example').default);
+const Example = lazy(() => import('./Example'));
 
 const ExampleConfig = {
   settings: {

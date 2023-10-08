@@ -150,9 +150,9 @@ const EnvelopeScrollbars = forwardRef((props, ref) => {
     );
 });
 
-function mapStateToProps({ fuse }) {
+function mapStateToProps({ envelope }) {
     return {
-        customScrollbars: fuse.settings.current.customScrollbars,
+        customScrollbars: envelope.settings.current.customScrollbars,
     };
 }
 

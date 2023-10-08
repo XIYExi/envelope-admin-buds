@@ -64,19 +64,20 @@ class JwtService extends EnvelopeUtils.EventEmitter {
     signInWithEmailAndPassword = (email, password) => {
         return new Promise((resolve, reject) => {
             axios
-                .get(jwtServiceConfig.signIn, {
+                .post(jwtServiceConfig.signIn, {
                     data: {
                         email,
                         password,
                     },
                 })
                 .then((response) => {
-                    if (response.data.user) {
-                        this.setSession(response.data.access_token);
-                        resolve(response.data.user);
-                        this.emit('onLogin', response.data.user);
+                    console.log('back',response)
+                    if (response.data[1].user) {
+                        this.setSession(response.data[1].access_token);
+                        resolve(response.data[1].user);
+                        this.emit('onLogin', response.data[1].user);
                     } else {
-                        reject(response.data.error);
+                        reject(response.data[1].error);
                     }
                 });
         });
