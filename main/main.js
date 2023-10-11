@@ -12,12 +12,13 @@ const HmacSHA256 = require('crypto-js/hmac-sha256');
 const Utf8 = require('crypto-js/enc-utf8');
 const jwtDecode = require('jwt-decode');
 const _ = require('lodash');
+const EnvelopeUtils = require('./utils');
 
 const {mockApi} = require('./data');
 let usersApi = mockApi.components.examples.auth_users.value;
 
 
-
+// 登录
 router.post('/auth/sign-in',async (ctx) => {
     // console.log(ctx.request.body);
     /**
@@ -25,13 +26,14 @@ router.post('/auth/sign-in',async (ctx) => {
      */
     const {email, password} = ctx.request.body.data;
 
-
+    // 相当于在数据库里面根据传过来的email查了一个user
     const user = _.cloneDeep(usersApi.find((_user) => _user.data.email === email));
 
     const error = [];
 
-    console.log(user)
+    // console.log(user)
 
+    // email不存在所以查不到user，直接返回报错
     if (!user) {
         console.log('Check your email address');
         error.push({
@@ -40,6 +42,7 @@ router.post('/auth/sign-in',async (ctx) => {
         });
     }
 
+    // 密码不正确
     if (user && user.password !== password) {
         console.log('Check your password');
         error.push({
@@ -48,6 +51,7 @@ router.post('/auth/sign-in',async (ctx) => {
         });
     }
 
+    // 正确则返回
     if (error.length === 0) {
         delete user.password;
 
@@ -65,6 +69,112 @@ router.post('/auth/sign-in',async (ctx) => {
     }
 })
 
+
+/**
+ * dashboard analytics
+ */
+router.get('/dashboards/analytics/widgets', async ctx => {
+    const widgets = mockApi.components.examples.analytics_dashboard_widgets.value;
+    console.log(widgets)
+    ctx.response.body = widgets;
+})
+
+
+/**
+ * apps calendar
+ */
+const eventsDB = mockApi.components.examples.calendar_events.value;
+const labelsDB = mockApi.components.examples.calendar_labels.value;
+
+router.get('/calendar/labels', async ctx => {
+    ctx.response.body = labelsDB;
+})
+
+router.post('/calendar/labels', async ctx => {
+
+    const data = ctx.request.body;
+    // console.log(data)
+
+    const newLabel = {
+        id: EnvelopeUtils.generateGUID(),
+        ...data
+    };
+    labelsDB.push(newLabel);
+
+    ctx.response.body = newLabel;
+})
+
+router.put('/calendar/labels/:id', async ctx => {
+    const {id} = ctx.params; // 获得路径参数
+    const data = ctx.request.body;
+    // console.log(id, data)
+
+    _.assign(_.find(labelsDB, { id: id }), data);
+
+    ctx.response.body = _.find(labelsDB, { id: id });
+
+})
+
+router.get('/calendar/labels/:id', async ctx=>{
+    const {id} = ctx.params; // 获得路径参数
+    const response = _.find(labelsDB, { label: id });
+
+    ctx.response.body = response ? response : 'Requested label do not exist.';
+})
+
+
+router.delete('/calendar/labels/:id', async ctx => {
+    const {id} = ctx.params;
+    _.remove(labelsDB, { id });
+    _.remove(eventsDB, { extendedProps: { label: id } });
+    ctx.response.body = id;
+})
+
+
+router.get('/calendar/events', async ctx => {
+    ctx.response.body = eventsDB;
+})
+
+router.post('/calendar/events', async ctx => {
+    const data = ctx.request.body;
+    const newEvent = { id: EnvelopeUtils.generateGUID(), ...data };
+    eventsDB.push(newEvent);
+    ctx.response.body = newEvent;
+})
+
+router.put('/calendar/events/:id',async ctx => {
+    const {id} = ctx.params;
+    const data = ctx.response.body;
+    _.assign(_.find(eventsDB, { id }), data);
+    ctx.response.body = _.find(eventsDB, { id });
+})
+
+router.put('/calendar/events/:id', async ctx => {
+    const {id} = ctx.params;
+    const data = ctx.response.body;
+    _.assign(_.find(eventsDB, { id }), data);
+
+    ctx.response.body = _.find(eventsDB, { id });
+})
+
+
+router.get('/calendar/events/:id', async ctx => {
+    const {id} = ctx.params;
+    const response = _.find(eventsDB, { event: id });
+    ctx.response.body = response ? response : 'Requested event do not exist.';
+})
+
+router.delete('/calendar/events/:id', async ctx => {
+    const {id} = ctx.params;
+    _.remove(eventsDB, { id });
+    ctx.response.body = id;
+})
+
+/**
+ * ================================
+ *     插件注册和koa启动
+ * ================================
+ */
 
 app.use(router.routes());
 

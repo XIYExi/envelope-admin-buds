@@ -1,4 +1,4 @@
-import _ from '@lodash';
+import _ from '../../@lodash';
 import {useRef} from 'react';
 
 function useDebounce(func, wait, options) {

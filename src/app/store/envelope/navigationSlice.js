@@ -66,6 +66,10 @@ export const selectNavigation = createSelector(
                     item.title = i18next.t(`navigation:${item.translate}`);
                 }
 
+                if (item.subtitleTranslate && item.subtitle){
+                    item.subtitle = i18next.t(`navigation:${item.subtitleTranslate}`);
+                }
+
                 // see if there is a children node
                 if (item.children) {
                     // run this function recursively on the children array
