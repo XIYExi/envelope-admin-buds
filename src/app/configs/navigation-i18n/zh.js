@@ -9,6 +9,8 @@ const locale = {
     CALENDAR: '日程',
     CALENDARSUB: '3个待办',
 
+    USERMANAGE: '用户管理',
+
     EXAMPLE: '案例',
 };
 

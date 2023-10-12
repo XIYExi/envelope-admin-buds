@@ -1,6 +1,6 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import _ from '@lodash';
+import _ from '../../../../../@lodash';
 
 export const getLabels = createAsyncThunk('calendarApp/labels/getLabels',
     async () => {

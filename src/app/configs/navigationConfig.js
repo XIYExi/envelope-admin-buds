@@ -46,6 +46,14 @@ const navigationConfig = [
                 url: '/apps/calendar',
                 translate: 'CALENDAR',
             },
+            {
+                id: 'apps.usermanage',
+                title: 'User Manage',
+                type: 'item',
+                icon: 'heroicons-outline:user',
+                url: '/apps/usermanage',
+                translate: 'USERMANAGE',
+            }
         ]
     },
     {

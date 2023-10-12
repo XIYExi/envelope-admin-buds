@@ -170,6 +170,26 @@ router.delete('/calendar/events/:id', async ctx => {
     ctx.response.body = id;
 })
 
+
+const userDB  = mockApi.components.examples.contacts.value;
+router.get('/usermanage/users', async ctx => {
+    const data = userDB.map((item) => {
+        return {
+            ...item,
+            emails: item.emails[0].email,
+            phoneNumbers: item.phoneNumbers[0].phoneNumber,
+            createTime: new Date().getTime(),
+        }
+    })
+
+    // console.log(data)
+
+    ctx.response.body = data;
+})
+
+
+
+
 /**
  * ================================
  *     插件注册和koa启动
