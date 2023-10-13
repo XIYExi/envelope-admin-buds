@@ -11,6 +11,8 @@ const locale = {
 
     USERMANAGE: '用户管理',
 
+    MAILBOX: '邮箱',
+
     EXAMPLE: '案例',
 };
 

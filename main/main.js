@@ -18,6 +18,7 @@ const {mockApi} = require('./data');
 let usersApi = mockApi.components.examples.auth_users.value;
 
 
+
 // 登录
 router.post('/auth/sign-in',async (ctx) => {
     // console.log(ctx.request.body);
@@ -68,7 +69,6 @@ router.post('/auth/sign-in',async (ctx) => {
         ctx.response.body =  [200, { error }];
     }
 })
-
 
 /**
  * dashboard analytics
@@ -123,14 +123,12 @@ router.get('/calendar/labels/:id', async ctx=>{
     ctx.response.body = response ? response : 'Requested label do not exist.';
 })
 
-
 router.delete('/calendar/labels/:id', async ctx => {
     const {id} = ctx.params;
     _.remove(labelsDB, { id });
     _.remove(eventsDB, { extendedProps: { label: id } });
     ctx.response.body = id;
 })
-
 
 router.get('/calendar/events', async ctx => {
     ctx.response.body = eventsDB;
@@ -158,7 +156,6 @@ router.put('/calendar/events/:id', async ctx => {
     ctx.response.body = _.find(eventsDB, { id });
 })
 
-
 router.get('/calendar/events/:id', async ctx => {
     const {id} = ctx.params;
     const response = _.find(eventsDB, { event: id });
@@ -172,6 +169,9 @@ router.delete('/calendar/events/:id', async ctx => {
 })
 
 
+/**
+ * usermanage
+ */
 let userDB  = mockApi.components.examples.contacts.value;
 
 router.get('/usermanage/users', async ctx => {
@@ -189,18 +189,16 @@ router.get('/usermanage/users', async ctx => {
     ctx.response.body = data;
 })
 
-
-
 router.get('/usermanage/user/:id', async ctx => {
 
-    console.log('koa get search order')
+    // console.log('koa get search order')
 
     const {id} = ctx.params;
     const data = userDB.map((item) => {
         return {
             ...item,
-            emails: item.emails[0].email,
-            phoneNumbers: item.phoneNumbers[0].phoneNumber,
+            emails: item?.emails[0]?.email,
+            phoneNumbers: item?.phoneNumbers[0]?.phoneNumber,
             createTime: new Date().getTime(),
         }
     })
@@ -213,6 +211,13 @@ router.get('/usermanage/user/:id', async ctx => {
         ctx.response.body = 'Requested task do not exist.';
 })
 
+router.post('/usermanage/user', async ctx => {
+    const user = ctx.request.body;
+    const newUser = { id: EnvelopeUtils.generateGUID(), ...user };
+
+    userDB.push(newUser);
+    ctx.response.body = newUser;
+})
 
 router.put('/usermanage/user/:id', async ctx => {
     const {id} = ctx.params;
@@ -232,7 +237,6 @@ router.put('/usermanage/user/:id', async ctx => {
 
 })
 
-
 router.delete('/usermanage/user/:id', async ctx => {
     const {id} = ctx.params;
     const data = userDB.map((item) => {
@@ -246,7 +250,6 @@ router.delete('/usermanage/user/:id', async ctx => {
     _.remove(data, { id });
     ctx.response.body = id;
 })
-
 
 
 router.get('/usermanage/tags', async ctx => {

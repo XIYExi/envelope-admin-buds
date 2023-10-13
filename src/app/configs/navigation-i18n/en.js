@@ -9,6 +9,8 @@ const locale = {
   CALENDAR: 'Calendar',
   CALENDARSUB: '3 upcoming events',
 
+  MAILBOX: 'Mailbox',
+
   USERMANAGE: 'User Manage',
 
 

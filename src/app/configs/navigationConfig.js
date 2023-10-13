@@ -53,6 +53,14 @@ const navigationConfig = [
                 icon: 'heroicons-outline:user',
                 url: '/apps/usermanage',
                 translate: 'USERMANAGE',
+            },
+            {
+                id: 'apps.mailbox',
+                title: 'Mailbox',
+                type: 'item',
+                icon: 'heroicons-outline:mail',
+                url: '/apps/mailbox',
+                translate: 'MAILBOX',
             }
         ]
     },
