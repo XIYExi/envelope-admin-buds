@@ -13,6 +13,7 @@ import {motion} from 'framer-motion';
 import {useDispatch, useSelector} from "react-redux";
 import {selectUsersTable} from "./store/usersTableSlice";
 import {useNavigate} from "react-router-dom";
+import {removeUserItem} from "./store/userItemSlice";
 
 /**
  * 表头数据约束
@@ -51,6 +52,12 @@ function UserManageAppContent(props) {
 
         console.log('selected', id)
         navigate(`/apps/usermanage/${id}`);
+    }
+
+    const handleRemoveUserItem = (id) => {
+        dispatch(removeUserItem(id)).then(() => {
+            navigate('/apps/usermanage');
+        });
     }
 
     return(
@@ -100,7 +107,9 @@ function UserManageAppContent(props) {
                                                 <Button
                                                     onClick={() => {navigate(`/apps/usermanage/${row.id}/edit`)}}
                                                 >Edit</Button>
-                                                <Button>Delete</Button>
+                                                <Button
+                                                    color="error" onClick={() => handleRemoveUserItem(row.id)}
+                                                >Delete</Button>
                                             </TableCell>
                                         </TableRow>
                                     </Fragment>

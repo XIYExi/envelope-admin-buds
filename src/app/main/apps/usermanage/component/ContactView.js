@@ -31,7 +31,6 @@ const ContactView = () => {
     }
 
 
-
     /*渲染当前用户信息卡片*/
     return (
         <React.Fragment>

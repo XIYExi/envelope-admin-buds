@@ -53,7 +53,7 @@ function EditView (props) {
 
     function handleRemoveContact() {
         dispatch(removeUserItem(user.id)).then(() => {
-            navigate('/apps/contacts');
+            navigate('/apps/usermanage');
         });
     }
 
