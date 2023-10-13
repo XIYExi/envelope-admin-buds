@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {
     Paper,
     TableContainer,
@@ -7,11 +7,12 @@ import {
     TableRow,
     TableCell,
     TableBody,
-    TablePagination
+    TablePagination, Button
 } from "@mui/material";
 import {motion} from 'framer-motion';
 import {useDispatch, useSelector} from "react-redux";
 import {selectUsersTable} from "./store/usersTableSlice";
+import {useNavigate} from "react-router-dom";
 
 /**
  * 表头数据约束
@@ -21,7 +22,8 @@ const columns = [
     { id: 'name', label: 'Name', minWidth: 170 },
     { id: 'phoneNumbers', label: 'Phone', minWidth: 100 },
     { id: 'emails', label: 'Email', },
-    { id: 'createTime',  label: 'Create Time' }
+    { id: 'createTime',  label: 'Create Time' },
+    { id: 'operation',  label: 'Operation' },
 ];
 
 
@@ -32,6 +34,7 @@ function UserManageAppContent(props) {
     const dispatch = useDispatch();
     const userTables = useSelector(selectUsersTable);
     const [selected, setSelected] = React.useState([]);
+    const navigate = useNavigate();
 
 
     const handleChangePage = (event, newPage) => {
@@ -46,22 +49,19 @@ function UserManageAppContent(props) {
     const handleClick = (event, id) => {
         const selectedIndex = selected.indexOf(id);
 
-
         console.log('selected', id)
-
-
-
+        navigate(`/apps/usermanage/${id}`);
     }
 
     return(
         <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
-            className="flex flex-col flex-auto w-full max-h-full"
+            className="flex flex-col flex-auto min-w-[100%] w-full max-h-full"
         >
-            <Paper>
-                <TableContainer>
-                    <Table stickyHeader aria-label="sticky table">
+            <Paper className='w-full'>
+                <TableContainer className='w-full'>
+                    <Table stickyHeader aria-label="sticky table" className='w-full'>
                         <TableHead>
                             <TableRow>
                                 {columns.map((column,index) => (
@@ -78,25 +78,37 @@ function UserManageAppContent(props) {
                         <TableBody>
                             {userTables.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
                                 return (
-                                    <TableRow
-                                        hover
-                                        role="checkbox"
-                                        tabIndex={-1}
-                                        key={index}
-                                        onClick={(event) => handleClick(event, row.id)}
-                                    >
-                                        {columns.map((column,_index) => {
-                                            const value = row[column.id];
-                                            return (
-                                                <TableCell key={_index} align={column.align}
-                                                >
-                                                    {column.format && typeof value === 'number' ? column.format(value) : value}
-                                                </TableCell>
-                                            );
-                                        })}
-                                    </TableRow>
+                                    <Fragment key={index}>
+                                        <TableRow
+                                            hover
+                                            role="checkbox"
+                                            tabIndex={-1}
+                                        >
+                                            {columns.map((column,_index) => {
+                                                const value = row[column.id];
+                                                if (_index !== columns.length-1)
+                                                    return (
+                                                        <TableCell key={_index} align={column.align}
+                                                                   onClick={(event) => handleClick(event, row.id)}
+                                                        >
+                                                            {column.format && typeof value === 'number' ? column.format(value) : value}
+                                                        </TableCell>
+                                                    );
+                                            })}
+
+                                            <TableCell>
+                                                <Button
+                                                    onClick={() => {navigate(`/apps/usermanage/${row.id}/edit`)}}
+                                                >Edit</Button>
+                                                <Button>Delete</Button>
+                                            </TableCell>
+                                        </TableRow>
+                                    </Fragment>
                                 );
                             })}
+
+
+
                         </TableBody>
                     </Table>
                 </TableContainer>

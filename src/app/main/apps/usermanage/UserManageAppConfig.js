@@ -1,4 +1,6 @@
 import { lazy } from 'react';
+import ContactView from "./component/ContactView";
+import EditView from "./component/EditView";
 
 const UserManageApp = lazy(() => import('./UserManageApp'));
 
@@ -12,6 +14,16 @@ const UserManageAppConfig = {
         {
             path: 'apps/usermanage',
             element: <UserManageApp />,
+            children: [
+                {
+                    path: ':id',
+                    element: <ContactView />
+                },
+                {
+                    path: ':id/edit',
+                    element: <EditView />
+                }
+            ]
         },
     ],
 };

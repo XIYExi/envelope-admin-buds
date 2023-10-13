@@ -1,13 +1,16 @@
-import {createAsyncThunk, createEntityAdapter, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createEntityAdapter, createSelector, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
+import EnvelopeUtils from "../../../../../@envelope/utils";
+import {addUserItem, removeUserItem, updateUserItem} from "./userItemSlice";
 
 /**
- * 这是对Table中的单个用户进行增删改查！
+ * Table数据
  *
  */
 
 
-export const getUsers = createAsyncThunk('userManageApp/usersTable/getUsers', async () => {
+export const getUsers = createAsyncThunk(
+    'userManageApp/usersTable/getUsers', async () => {
     const response = await axios.get('/api/usermanage/users');
     const data = await response.data;
 
@@ -16,30 +19,7 @@ export const getUsers = createAsyncThunk('userManageApp/usersTable/getUsers', as
     return data;
 })
 
-
-export const updateUser = createAsyncThunk(
-    'userManageApp/usersTable/updateUsers',
-    async (newUser, {dispatch}) => {
-
-    }
-)
-
-
-export const addUser = createAsyncThunk(
-    'userManageApp/usersTable/addUsers',
-    async (newUser, {dispatch}) => {
-
-    }
-)
-
-
-export const removeUser = createAsyncThunk(
-    'userManageApp/usersTable/removeUsers',
-    async (newUser, {dispatch}) => {
-
-    }
-)
-
+export const selectSearchText = ({ userManageApp }) => userManageApp.usersTable.searchText;
 
 const userManageAdapter = createEntityAdapter({})
 
@@ -48,11 +28,41 @@ export const {
 } = userManageAdapter.getSelectors((state) => state.userManageApp.usersTable)
 
 
+export const selectFilteredUsers = createSelector(
+    [selectUsersTable, selectSearchText],
+    (users, searchText) => {
+        if (searchText.length === 0) {
+            return users;
+        }
+        return EnvelopeUtils.filterArrayByString(users, searchText);
+    }
+);
+
+export const selectGroupedFilteredUsers = createSelector(
+    [selectFilteredUsers],
+    (users) => {
+        return users
+            .sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base' }))
+            .reduce((r, e) => {
+                // get first letter of name of current element
+                const group = e.name[0];
+                // if there is no property in accumulator with this letter create it
+                if (!r[group]) r[group] = { group, children: [e] };
+                // if there is push current element to children array for that letter
+                else r[group].children.push(e);
+                // return accumulator
+                return r;
+            }, {});
+    }
+);
+
+
 const usersTableSlice = createSlice({
     name: 'userManageApp/usersTable',
     initialState: userManageAdapter.getInitialState({
         selectUsers: [],
         usersDialogOpen: false, // 修改单个用户数据的弹窗
+        searchText: '',
     }),
     reducers: {
 
@@ -67,10 +77,11 @@ const usersTableSlice = createSlice({
         [getUsers.fulfilled]: (state, action) => {
             userManageAdapter.setAll(state, action.payload);
             state.selectedUsers = action.payload.map((item) => item.id);
+            state.searchText = '';
         },
-        [addUser.fulfilled]: userManageAdapter.addOne,
-        [updateUser.fulfilled]: userManageAdapter.upsertOne,
-        [removeUser.fulfilled]: userManageAdapter.removeOne,
+        [addUserItem.fulfilled]: userManageAdapter.addOne,
+        [updateUserItem.fulfilled]: userManageAdapter.upsertOne,
+        [removeUserItem.fulfilled]: userManageAdapter.removeOne,
     },
 });
 

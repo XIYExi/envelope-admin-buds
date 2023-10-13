@@ -11,7 +11,6 @@ function UserManageAppHeader(props){
             <div className='flex flex-col sm:flex-col items-center'>
                 <div className='flex items-center'>
                     <IconButton
-                        onClick={(ev) => onToggleLeftSidebar()}
                         aria-label="open left sidebar"
                         size='small'
                     >

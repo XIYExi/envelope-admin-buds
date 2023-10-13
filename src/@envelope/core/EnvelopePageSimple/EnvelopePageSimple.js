@@ -245,7 +245,7 @@ const EnvelopePageSimple = forwardRef((props, ref) => {
               {props.content && (
                 <EnvelopeScrollbars
                   enable={props.scroll === 'content'}
-                  className={classNames('FusePageSimple-content container')}
+                  className={classNames('EnvelopePageSimple-content container')}
                 >
                   {props.content}
                 </EnvelopeScrollbars>
