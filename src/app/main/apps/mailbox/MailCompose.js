@@ -17,7 +17,7 @@ import {
     Typography
 } from "@mui/material";
 import EnvelopeSvgIcon from "../../../../@envelope/core/EnvelopeSvgIcon";
-import MailAttachment from "./mail/MailAttachment";
+import MailAttachment from "./MailAttachment";
 import WYSIWYGEditor from "../../../shared-components/WYSIWYGEditor";
 
 

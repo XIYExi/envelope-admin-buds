@@ -5,7 +5,10 @@ function MailAttachment(props) {
     const {attachment} = props;
 
     return(
-        <div className='flex items-center m-12'>
+        <div className='flex items-center m-12' onClick={() => {
+            //TODO 下载逻辑
+            console.log(`download url: ${attachment.downloadUrl} ...`)
+        }}>
             {
                 attachment.type.startsWith('image/') && (
                     <img

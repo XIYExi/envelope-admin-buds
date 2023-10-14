@@ -8,6 +8,9 @@ import Mails from "./mails/Mails";
 import MailboxAppSidebarContent from "./MailboxAppSidebarContent";
 import withReducer from "../../../store/withReducer";
 import reducer from "./store";
+import {getFilters} from "./store/filtersSlice";
+import {getFolders} from "./store/foldersSlice";
+import {getLabels} from "./store/labelsSlice";
 
 
 const Root = styled(EnvelopePageSimple)(({theme}) => ({
@@ -35,7 +38,9 @@ function MailboxApp(props) {
     const location = useLocation();
 
     useEffect(() => {
-
+        dispatch(getFilters());
+        dispatch(getFolders());
+        dispatch(getLabels());
     }, [dispatch])
 
     useEffect(() => {

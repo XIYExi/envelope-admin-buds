@@ -68,6 +68,7 @@
     "koa": "^2.14.2",
     "koa-bodyparser": "^4.4.1",
     "koa-router": "^12.0.0",
+    "require-directory": "^2.1.1",
     "lodash": "4.17.21",
     "material-ui-popup-state": "5.0.9",
     "mini-css-extract-plugin": "^2.4.5",

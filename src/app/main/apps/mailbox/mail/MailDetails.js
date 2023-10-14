@@ -11,6 +11,7 @@ import MailAttachment from "./MailAttachment";
 import withRouter from "../../../../../@envelope/core/withRouter";
 import MailToolbar from "./MailToolbar";
 import MailLabel from "./MailLabel";
+import MailInfo from "./MailInfo";
 
 
 function MailDetails(props) {
