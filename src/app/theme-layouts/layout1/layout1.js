@@ -58,8 +58,6 @@ function Layout1(props) {
                         <EnvelopeDialog />
 
                         <EnvelopeSuspense>{useRoutes(routes)}</EnvelopeSuspense>
-
-                        {props.children}
                     </div>
 
                     {config.footer.display && (

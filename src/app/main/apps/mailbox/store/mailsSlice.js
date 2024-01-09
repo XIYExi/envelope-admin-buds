@@ -3,6 +3,7 @@ import axios from "axios";
 import {selectFolders} from "./foldersSlice";
 import {selectLabels} from "./labelsSlice";
 import {selectFilters} from "./filtersSlice";
+import _ from "../../../../../@lodash";
 
 export const getMails = createAsyncThunk(
     'mailboxApp/mails/getMails',

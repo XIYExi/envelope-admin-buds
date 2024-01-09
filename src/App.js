@@ -1,9 +1,7 @@
 import './App.css';
 import DemoContent from "@envelope/core/DemoContent";
-import DemoSidebarContent from "@envelope/core/DemoSidebarContent/DemoSidebarContent";
 import useTimeout from "@envelope/hook/useTimeout";
-import {useEffect, useState} from "react";
-import {useSelector} from "react-redux";
+import {useState} from "react";
 
 
 function App() {

@@ -14,6 +14,12 @@ const locale = {
     MAILBOX: '邮箱',
 
     EXAMPLE: '案例',
+
+    LOWCODE: '低代码组件',
+
+    FORM: '表单',
+
+    ACHIEVE: '成就系统',
 };
 
 export default locale;

@@ -3,7 +3,7 @@ import EnvelopeLayout from "../@envelope/core/EnvelopeLayout";
 import EnvelopeTheme from "../@envelope/core/EnvelopeTheme";
 import { SnackbarProvider } from 'notistack';
 import { useSelector } from 'react-redux';
-import rtlPlugin from 'stylis-plugin-rtl';
+//import rtlPlugin from 'stylis-plugin-rtl';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { selectCurrentLanguageDirection} from "./store/i18nSlice";
@@ -20,7 +20,7 @@ import {Fragment} from "react";
 const emotionCacheOptions = {
     rtl: {
         key: 'muirtl',
-        stylisPlugins: [rtlPlugin],
+        stylisPlugins: [],
         insertionPoint: document.getElementById('emotion-insertion-point'),
     },
     ltr: {

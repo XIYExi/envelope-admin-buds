@@ -11,10 +11,16 @@ const locale = {
 
   MAILBOX: 'Mailbox',
 
-  USERMANAGE: 'User Manage',
-
+  FORM: 'Form',
 
   EXAMPLE: 'Example',
+
+  USERMANAGE: 'User Manage',
+
+  LOWCODE: 'Lowcode',
+
+  ACHIEVE: 'Achieve'
+
 };
 
 export default locale;

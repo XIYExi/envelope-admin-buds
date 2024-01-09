@@ -2,13 +2,15 @@ import i18next from 'i18next';
 import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import en from './i18n/en';
+import zh from "./i18n/zh";
 import SelectMailMessage from './SelectMailMessage';
 import MailDetails from './mail/MailDetails';
+
 
 const MailboxApp = lazy(() => import('./MailboxApp'));
 
 i18next.addResourceBundle('en', 'mailboxApp', en);
-
+i18next.addResourceBundle('zh', 'mailboxApp', zh);
 
 const MailboxAppConfig = {
     settings: {

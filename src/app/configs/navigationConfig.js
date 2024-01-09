@@ -61,6 +61,14 @@ const navigationConfig = [
                 icon: 'heroicons-outline:mail',
                 url: '/apps/mailbox',
                 translate: 'MAILBOX',
+            },
+            {
+                id: 'apps.achieve',
+                title: 'Achieve',
+                type: 'item',
+                icon: 'heroicons-outline:mail',
+                url: '/apps/achieve',
+                translate: 'ACHIEVE',
             }
         ]
     },
@@ -71,7 +79,25 @@ const navigationConfig = [
         type: 'item',
         icon: 'heroicons-outline:star',
         url: 'example',
-    }
+    },
+    {
+        id: 'lowcode',
+        title: 'Lowcode',
+        subtitle: 'Lowcode component for fast dev',
+        subtitleTranslate: 'APPLICATIONSDESC',
+        type: 'group',
+        translate: 'LOWCODE',
+        children: [
+            {
+                id: 'lowcode.innermanage',
+                title: 'Form',
+                translate: 'FORM',
+                type: 'item',
+                icon: 'heroicons-outline:table',
+                url: '/lowcode/form',
+            }
+        ]
+    },
 ]
 
 

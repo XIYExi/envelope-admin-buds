@@ -9,11 +9,13 @@ import Error404Page from '../main/404/Error404Page';
 import ExampleConfig from '../main/example/ExampleConfig';
 import dashboardsConfig from "../main/dashboards/dashboardsConfig";
 import appsConfig from "../main/apps/appsConfig";
+import lowcodeConfig from "../main/lowcode/lowcodeConfig";
 
 
 const routeConfigs = [
     ...dashboardsConfig ,
     ...appsConfig,
+    ...lowcodeConfig,
     ExampleConfig,
     SignOutConfig,
     SignInConfig,
@@ -23,7 +25,7 @@ const routeConfigs = [
 const routes = [
     ...EnvelopeUtils.generateRoutesFromConfigs(routeConfigs,
         settingsConfig.defaultAuth),
-    {
+     {
         path: '/',
         element: <Navigate to="dashboards/analytics" />,
         auth: settingsConfig.defaultAuth,
