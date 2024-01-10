@@ -1,6 +1,12 @@
-import {Button, FormControlLabel, IconButton, Popover, Switch, TextField} from "@mui/material";
+import {Button, IconButton, Popover, TextField} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {closeEditAchieveDialog, selectAchieveDialog, updateAchieve} from "../store/achievesSlice";
+import {
+    addAchieve,
+    closeEditAchieveDialog,
+    closeNewAchieveDialog,
+    selectAchieveDialog,
+    updateAchieve
+} from "../store/achievesSlice";
 import {Controller, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from 'yup';
@@ -23,6 +29,9 @@ const schema = yup.object().shape({
 function AchieveForm(props) {
     const dispatch = useDispatch();
 
+    const userId = '1';
+
+
 
     const achieveDialog = useSelector(selectAchieveDialog);
 
@@ -33,11 +42,6 @@ function AchieveForm(props) {
         resolver: yupResolver(schema)
     });
     const {isValid, dirtyFields, errors} = formState;
-
-    const start = watch('start');
-    const end = watch('end');
-    const id = watch('id');
-
 
     const initDialog = useCallback(() => {
         if (achieveDialog.type === 'edit' && achieveDialog.data) {
@@ -64,7 +68,7 @@ function AchieveForm(props) {
     function closeComposeDialog() {
         return achieveDialog.type === 'edit'
             ? dispatch(closeEditAchieveDialog())
-            : null;
+            : dispatch(closeNewAchieveDialog());
     }
 
     function handleRemove() {
@@ -74,9 +78,9 @@ function AchieveForm(props) {
     function onSubmit(ev) {
         ev.preventDefault();
         const data = getValues();
-        // console.log(data);
+        //console.log('new', data);
         if (achieveDialog.type === 'new') {
-            //dispatch(addEvent(data));
+            dispatch(addAchieve({data, userId}));
         } else {
             dispatch(updateAchieve({ ...achieveDialog.data, ...data }));
         }
@@ -88,7 +92,7 @@ function AchieveForm(props) {
         <Popover
             {...achieveDialog.props}
             anchorReference="anchorPosition"
-            anchorPosition={{ top: 250, left: 600 }}
+            anchorPosition={{ top: 450, left: 800 }}
             anchorOrigin={{
                 vertical: 'center',
                 horizontal: 'right',
@@ -201,13 +205,13 @@ function AchieveForm(props) {
                                         className="mt-8 mb-16 w-full"
                                         value={new Date(value)}
                                         onChange={onChange}
+                                        format={'yyyy-MM-dd HH:mm:ss'}
                                         slotProps={{
                                             textField: {
                                                 label: 'deathTime',
                                                 variant: 'outlined',
                                             },
                                         }}
-                                        maxDate={end}
                                     />
                                 )}
                             />
@@ -311,7 +315,7 @@ function AchieveForm(props) {
                         <Button
                             variant="contained"
                             color="primary"
-                            /*onClick={onSubmit}*/
+                            onClick={onSubmit}
                             disabled={_.isEmpty(dirtyFields) || !isValid}
                         >
                             Add

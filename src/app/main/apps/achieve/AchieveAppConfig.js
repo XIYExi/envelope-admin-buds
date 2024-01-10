@@ -1,8 +1,7 @@
 import { lazy } from 'react';
 import AchieveListApp from "./list/AchieveListApp";
-import AchieveCreateApp from "./page/AchieveCreateApp";
-import AchieveRankApp from "./page/AchieveRankApp";
-import AchieveRewardApp from "./page/AchieveRewardApp";
+import AchieveRankApp from "./rank/AchieveRankApp";
+import AchieveRewardApp from "./reward/AchieveRewardApp";
 import {Navigate} from "react-router-dom";
 
 const AchieveApp = lazy(() => import('./AchieveApp'));

@@ -3,6 +3,8 @@ import {motion} from "framer-motion";
 import {Button, Typography} from "@mui/material";
 import EnvelopeNavigation from "../../../../@envelope/core/EnvelopeNavigation/EnvelopeNavigation";
 import EnvelopeSvgIcon from "../../../../@envelope/core/EnvelopeSvgIcon";
+import {useDispatch} from "react-redux";
+import {openNewAchieveDialog} from "./store/achievesSlice";
 
 const achieveNavigation = [
     {
@@ -29,12 +31,16 @@ const achieveNavigation = [
 
 function AchieveLeftSidebarApp(props) {
 
+    const dispatch = useDispatch();
 
+    function handleOpenDialog() {
+        dispatch(openNewAchieveDialog());
+    }
 
     return (
         <motion.div
             initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1, transition: { delay: 0.4 } }}
+            animate={{ y: 0, opacity: 1, transition: { delay: 0.3 } }}
             className="flex-auto border-l-1"
         >
             <div className="mb-24 mt-40 mx-24">
@@ -60,7 +66,7 @@ function AchieveLeftSidebarApp(props) {
                         variant="contained"
                         color="secondary"
                         className="w-full"
-                        /*onClick={handleOpenDialog}*/
+                        onClick={handleOpenDialog}
                         startIcon={<EnvelopeSvgIcon>heroicons-outline:plus</EnvelopeSvgIcon>}
                     >
                         创建成就

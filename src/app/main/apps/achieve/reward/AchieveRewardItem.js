@@ -1,10 +1,8 @@
 import {ListItem, styled, Typography} from "@mui/material";
-import EnvelopeSvgIcon from "../../../../../@envelope/core/EnvelopeSvgIcon";
-import _ from "../../../../../@lodash";
-import moment from "moment";
 import {useDispatch} from "react-redux";
-import {deleteAchieve, openEditAchieveDialog} from "../store/achievesSlice";
-
+import {openEditRewardDialog, removeRewards} from "../store/rewardSlice";
+import EnvelopeSvgIcon from "../../../../../@envelope/core/EnvelopeSvgIcon";
+import {Image} from "@mui/icons-material";
 
 const StyledListItem = styled(ListItem)(({ theme, unread, selected }) => ({
     background: theme.palette.background.default,
@@ -24,18 +22,18 @@ const StyledListItem = styled(ListItem)(({ theme, unread, selected }) => ({
     },
 }));
 
-function AchieveListItem(props) {
 
-    const {achieve} = props;
+function AchieveRewardItem(props) {
 
+    const {reward} = props;
     const dispatch = useDispatch();
 
     const handleOpenEditDialog = () => {
-        dispatch(openEditAchieveDialog(achieve));
+        dispatch(openEditRewardDialog(reward));
     }
 
     const handleRemove = (id) => {
-        dispatch(deleteAchieve(id));
+        dispatch(removeRewards(id));
     }
 
     return (
@@ -46,38 +44,30 @@ function AchieveListItem(props) {
             <div className='flex flex-auto min-w-0'>
                 <div className='flex flex-col flex-auto min-w-0 mr-10'>
                     <div className='flex w-full space-x-6'>
+
                         <div className='flex items-start mx-10'>
-                            <EnvelopeSvgIcon>
-                                heroicons-solid:paper-clip
-                            </EnvelopeSvgIcon>
+                            {/*TODO 奖励的预览图*/}
+                            <Image />
                         </div>
 
                         <div className='flex flex-col w-full min-w-0'>
                             <div className='flex items-center w-full'>
-                                {/*成就名称*/}
+                                {/*奖励名称*/}
                                 <Typography className="mr-8 font-semibold truncate">
-                                    {achieve.achieveName}
+                                    奖励：{reward.rewardName}
                                 </Typography>
                             </div>
-                            <div className='flex items-center w-full mt-4'>
-                                <span className="leading-4 truncate">{achieve.description}</span>
-                            </div>
-
-                            <Typography color="text.secondary" className="mt-8 leading-normal line-clamp-2">
-                                {_.truncate(achieve.conditions.replace(/<(?:.|\n)*?>/gm, ''), { length: 180 })}
-                            </Typography>
 
                             <div className='flex'>
                                 <Typography color="text.secondary" className="mt-4 leading-normal line-clamp-2">
-                                    成就点: {achieve.score}
-                                </Typography>
-                                <Typography color="text.secondary" className="mt-4 leading-normal line-clamp-2 ml-6">
-                                    截止时间:  {moment(achieve.deathTime).format('YYYY-MM-DD HH:mm:ss')}
+                                    成就点: {reward.score}
                                 </Typography>
                             </div>
                         </div>
+
                     </div>
                 </div>
+
 
                 {/*操作栏*/}
                 <div className='flex justify-center items-center'>
@@ -85,14 +75,13 @@ function AchieveListItem(props) {
                          onClick={handleOpenEditDialog}
                     >edit</div>
                     <div className='mr-8 hover:text-red duration-300 transition-all'
-                         onClick={() => handleRemove(achieve.id)}
+                         onClick={() => handleRemove(reward.id)}
                     >delete</div>
                 </div>
             </div>
-
         </StyledListItem>
     )
 }
 
 
-export default AchieveListItem;
+export default AchieveRewardItem;
