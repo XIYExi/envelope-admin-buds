@@ -19,7 +19,8 @@ export const getUsers = createAsyncThunk(
     return data;
 })
 
-export const selectSearchText = ({ userManageApp }) => userManageApp.usersTable.searchText;
+export const selectSearchText = ({ userManageApp }) =>
+    userManageApp.usersTable.searchText;
 
 const userManageAdapter = createEntityAdapter({})
 

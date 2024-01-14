@@ -65,9 +65,12 @@ class EnvelopeAuthorization extends Component {
             User is guest
             Redirect to Login Page
             */
+
         if (!userRole || userRole.length === 0) {
-            setTimeout(() => history.push('/sign-in'), 0);
+            // TODO dev环境中注销掉，不然每次都会触发重定向
+            // setTimeout(() => history.push('/sign-in'), 0);
         } else {
+
             /*
               User is member
               User must be on unAuthorized page or just logged in
@@ -76,12 +79,15 @@ class EnvelopeAuthorization extends Component {
             setTimeout(() => history.push(redirectUrl), 0);
 
             resetSessionRedirectUrl();
+
         }
     }
 
     render() {
-        // console.info('Fuse Authorization rendered', this.state.accessGranted);
-        return this.state.accessGranted ? this.props.children : null;
+        console.info('Fuse Authorization rendered', this.state.accessGranted);
+        // TODO 注销掉，否则刷新就会触发accessGranted鉴权
+        //return this.state.accessGranted ? this.props.children : null;
+        return this.props.children;
     }
 }
 

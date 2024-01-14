@@ -1,11 +1,9 @@
 import EnvelopePageSimple from "../../../../@envelope/core/EnvelopePageSimple/EnvelopePageSimple";
 import {useThemeMediaQuery} from "../../../../@envelope/hook";
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import AchieveHeader from "./AchieveHeaderApp";
 import {Outlet} from "react-router-dom";
 import AchieveLeftSidebarApp from "./AchieveLeftSidebarApp";
-import {getAchievesById, selectAchieves} from "./store/achievesSlice";
-import {useDispatch, useSelector} from "react-redux";
 import withReducer from "../../../store/withReducer";
 import reducer from "./store";
 
@@ -13,14 +11,11 @@ function AchieveApp(props) {
     const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
     const [leftSidebarOpen, setLeftSidebarOpen] = useState(!isMobile);
 
-
-
     function handleToggleLeftSidebar() {
         setLeftSidebarOpen(!leftSidebarOpen);
     }
 
-    const dispatch = useDispatch();
-
+    // const dispatch = useDispatch();
 
 
     return(

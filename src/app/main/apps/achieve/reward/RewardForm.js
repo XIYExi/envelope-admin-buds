@@ -14,9 +14,10 @@ import EnvelopeUtils from "../../../../../@envelope/utils";
 import {Button, IconButton, Popover, TextField} from "@mui/material";
 import EnvelopeSvgIcon from "../../../../../@envelope/core/EnvelopeSvgIcon";
 import _ from "../../../../../@lodash";
+import RewardModel from "../models/RewardModel";
 
 
-const defaultValues = RewardForm();
+const defaultValues = RewardModel();
 
 const schema = yup.object().shape({
 

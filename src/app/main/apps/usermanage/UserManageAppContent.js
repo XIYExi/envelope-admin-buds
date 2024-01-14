@@ -67,6 +67,7 @@ function UserManageAppContent(props) {
             className="flex flex-col flex-auto min-w-[100%] w-full max-h-full"
         >
             <Paper className='w-full'>
+
                 <TableContainer className='w-full'>
                     <Table stickyHeader aria-label="sticky table" className='w-full'>
                         <TableHead>
@@ -115,9 +116,6 @@ function UserManageAppContent(props) {
                                     </Fragment>
                                 );
                             })}
-
-
-
                         </TableBody>
                     </Table>
                 </TableContainer>

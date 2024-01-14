@@ -1,10 +1,8 @@
 import {combineReducers} from "@reduxjs/toolkit";
-import achieves from './achievesSlice';
-import reward from './rewardSlice';
+import usersTable from "./usersTableSlice";
 
 const reducer = combineReducers({
-    achieves,
-    reward,
+    usersTable
 })
 
 export default reducer;

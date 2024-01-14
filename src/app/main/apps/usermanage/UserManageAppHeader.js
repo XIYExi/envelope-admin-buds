@@ -6,44 +6,27 @@ import React from 'react';
 
 function UserManageAppHeader(props){
 
-    const {onToggleLeftSidebar} = props;
-
     return (
-        <React.Fragment>
-
           <div className='flex flex-col md:flex-row w-full p-12 justify-between z-10 container'>
-        <div className='flex flex-col sm:flex-col items-center'>
-            <div className='flex items-center'>
+                <div className='flex flex-col sm:flex-col items-center'>
+                    <div className='flex items-center'>
+
+                        <Typography className="text-2xl font-semibold tracking-tight whitespace-nowrap mx-16">
+                            用户管理列表
+                        </Typography>
+                    </div>
+                </div>
+
+
                 <IconButton
-                    aria-label="open left sidebar"
-                    size='small'
+                    className="mx-8"
+                    aria-label="add"
+                    component={NavLinkAdapter}
+                    to="new/edit"
                 >
-                    <EnvelopeSvgIcon>heroicons-outline:menu</EnvelopeSvgIcon>
+                    <EnvelopeSvgIcon>heroicons-outline:plus-circle</EnvelopeSvgIcon>
                 </IconButton>
-
-                <Typography className="text-2xl font-semibold tracking-tight whitespace-nowrap mx-16">
-                    用户管理列表
-                </Typography>
-            </div>
         </div>
-
-
-        <IconButton
-            className="mx-8"
-            aria-label="add"
-            component={NavLinkAdapter}
-            to="new/edit"
-        >
-            <EnvelopeSvgIcon>heroicons-outline:plus-circle</EnvelopeSvgIcon>
-        </IconButton>
-
-    </div>
-
-            <div>
-                <Input />
-            </div>
-
-        </React.Fragment>
     )
 }
 
