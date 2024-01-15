@@ -1,8 +1,10 @@
 import {combineReducers} from "@reduxjs/toolkit";
 import usersTable from "./usersTableSlice";
+import userItem from './userItemSlice';
 
 const reducer = combineReducers({
-    usersTable
+    usersTable,
+    userItem,
 })
 
 export default reducer;

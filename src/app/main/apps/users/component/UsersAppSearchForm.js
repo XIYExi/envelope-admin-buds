@@ -12,7 +12,6 @@ function UsersAppSearchForm(props) {
 
                 <CustomizedSearchInput />
 
-
             </div>
         </Box>
     )

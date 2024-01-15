@@ -55,7 +55,6 @@ function AchieveLeftSidebarApp(props) {
                 </Typography>
             </div>
 
-
             <div className="mb-24">
                 <Typography className="px-28 py-10 uppercase text-12 font-600" color="secondary.main">
 

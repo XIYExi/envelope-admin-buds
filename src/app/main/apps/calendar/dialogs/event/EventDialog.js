@@ -38,7 +38,7 @@ function EventDialog(props) {
         defaultValues,
         mode: 'onChange',
         resolver: yupResolver(schema),
-    })
+    });
 
     const {isValid, dirtyFields, errors} = formState;
 

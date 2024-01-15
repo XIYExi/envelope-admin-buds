@@ -51,7 +51,7 @@ const navigationConfig = [
                 title: 'User Manage',
                 type: 'item',
                 icon: 'heroicons-outline:user',
-                url: '/apps/usermanage',
+                url: '/apps/users',
                 translate: 'USERMANAGE',
             },
             {

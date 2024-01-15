@@ -4,14 +4,12 @@ import {useDeepCompareEffect, useThemeMediaQuery} from "../../../../@envelope/ho
 import {Fragment, useEffect, useRef, useState} from "react";
 import {useDispatch} from "react-redux";
 import {useParams} from "react-router-dom";
-import UserManageAppHeader from "../usermanage/UserManageAppHeader";
-import UserManageAppSidebarContent from "../usermanage/UserManageAppSidebarContent";
-import UserManageAppContent from "../usermanage/UserManageAppContent";
 import withReducer from "../../../store/withReducer";
 import reducer from "./store";
 import UsersHeaderApp from "./UsersHeaderApp";
 import UsersAppContent from "./UsersAppContent";
 import {getTableUsers} from "./store/usersTableSlice";
+import UsersRightSidebarApp from "./UsersRightSidebarApp";
 
 
 const Root = styled(EnvelopePageSimple)(({ theme }) => ({
@@ -49,10 +47,10 @@ function UsersApp(props) {
             <Root
                 ref={pageLayout}
                 header={<UsersHeaderApp />}
-              /*  rightSidebarContent={<UserManageAppSidebarContent />}
+                rightSidebarContent={<UsersRightSidebarApp />}
                 rightSidebarOpen={rightSidebarOpen}
                 rightSidebarOnClose={() => setRightSidebarOpen(false)}
-                rightSidebarWidth={640}*/
+                rightSidebarWidth={400}
                 scroll={isMobile ? 'normal' : 'content'}
                 content={<UsersAppContent />}
             />

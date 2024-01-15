@@ -14,7 +14,7 @@ import {
     TablePagination,
     TableRow
 } from "@mui/material";
-import { selectUsersDataSource} from "./store/usersTableSlice";
+import {selectFilteredUsers, selectFilteredUsersWithCreatedTime, selectUsersDataSource} from "./store/usersTableSlice";
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -40,9 +40,12 @@ function UsersAppContent(props) {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(12);
     const dispatch = useDispatch();
-    const userTables = useSelector(selectUsersDataSource);
+
+
+    const userTables = useSelector(selectFilteredUsersWithCreatedTime);
     const [selected, setSelected] = React.useState([]);
     const navigate = useNavigate();
+
 
 
     const handleChangePage = (event, newPage) => {
@@ -55,26 +58,15 @@ function UsersAppContent(props) {
     };
 
 
-    const handleClick = (event, id) => {
-        const selectedIndex = selected.indexOf(id);
-
-        console.log('selected', id)
-        //navigate(`/apps/usermanage/${id}`);
-    }
-
-
-
     return (
         <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
             className="flex flex-col flex-auto min-w-[100%] w-full max-h-full"
         >
-            <Paper className='w-full'>
-
+            <Paper className='w-full px-20 py-12'>
 
                 <UsersAppSearchForm />
-
 
                 <TableContainer className='w-full'>
                     <Table

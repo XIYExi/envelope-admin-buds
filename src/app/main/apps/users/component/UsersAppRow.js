@@ -4,6 +4,10 @@ import IconButton from "@mui/material/IconButton";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import moment from "moment";
+import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {getUserItem, removeUserItem} from "../store/userItemSlice";
+import {getTableUsers} from "../store/usersTableSlice";
 
 
 
@@ -11,6 +15,9 @@ function UsersAppRow(props) {
     const [open, setOpen] = React.useState(false);
 
     const {columns, row} = props;
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
 
     return (
@@ -64,6 +71,12 @@ function UsersAppRow(props) {
                         style={{
                             fontWeight: 300
                         }}
+                        onClick={() => {
+                            // 先dispatch获取user数据
+                            dispatch(getUserItem(row.sysId)).then(() => {
+                                navigate(`/apps/users/${row.sysId}/edit`);
+                            })
+                        }}
                     >
                         Edit
                     </Button>
@@ -71,6 +84,11 @@ function UsersAppRow(props) {
                     <Button
                         style={{
                             fontWeight: 300
+                        }}
+                        onClick={() => {
+                            dispatch(removeUserItem(row.sysId)).then(() => {
+                                dispatch(getTableUsers('1'));
+                            })
                         }}
                     >
                         Delete

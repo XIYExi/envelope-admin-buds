@@ -1,4 +1,5 @@
 import {lazy} from 'react';
+import EditView from "./component/EditView";
 
 const UsersApp = lazy(() => import('./UsersApp'));
 
@@ -13,7 +14,12 @@ const UsersAppConfig = {
         {
             path: '/apps/users',
             element: <UsersApp/>,
-            children: []
+            children: [
+                {
+                    path: ':id/edit',
+                    element: <EditView />
+                }
+            ]
         },
     ],
 };
